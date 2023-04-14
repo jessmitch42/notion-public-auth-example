@@ -5,11 +5,20 @@
 3. Public integrations require a redirect URI that you own. A simple way to create a redirect URI is to deploy this repo on [Vercel](https://vercel.com/), which will provide a private domain.
 4. Create a `.env` file with the following environment variables:
 
+// TODO: add Notion integration set-up instructions.
+
 ```
-NOTION_AUTH_URL=<your-auth-url>
+NOTION_AUTH_URL=
 OATH_CLIENT_ID=<client-id>
 OATH_CLIENT_SECRET=<client-secret>
+NOTION_AUTH_URL=<your-auth-url>
+OAUTH_CLIENT_ID=<your-client-id>
+OAUTH_CLIENT_SECRET=<your-client-secret>
+OAUTH_REDIRECT_URI=<your-redirect-uri>
+#
 ```
+
+All of these variables are available in notion.so/my-integrations after you have created an integration and set it to be public.
 
 ---
 
