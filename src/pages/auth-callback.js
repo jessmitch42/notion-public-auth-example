@@ -74,16 +74,27 @@ export default function AuthCallback() {
             Click the button below to test using the Notion API with the token
             you just created.
           </p>
+          <p>
+            <b>Note:</b> Your integration must have user capabilities enabled to
+            use this endpoint. Visit your{" "}
+            <a href="https://www.notion.so/my-integrations">
+              integration settings
+            </a>{" "}
+            and go to the <b>Capabilities</b> tab to update as needed.
+          </p>
           {/* Once we have a token, let's see if the token actually works for API requests */}
           <button onClick={onClick}>Test API</button>
           {userResults && (
-            <ul>
-              {userResults.map((u, i) => (
-                <li key={i}>
-                  {u.id}: {u.name}
-                </li>
-              ))}
-            </ul>
+            <>
+              <h3>GET /users results</h3>
+              <ul>
+                {userResults.map((u, i) => (
+                  <li key={i}>
+                    {u.id}: {u.name}
+                  </li>
+                ))}
+              </ul>
+            </>
           )}
         </section>
       )}
