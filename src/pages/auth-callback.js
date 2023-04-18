@@ -45,6 +45,7 @@ export default function AuthCallback() {
     setLoading(false);
     setUserResults(users.results);
   };
+
   return (
     <main>
       <Link href="/">Go home</Link>
@@ -65,10 +66,16 @@ export default function AuthCallback() {
           </ul>
         )}
         {loading && <h3>Loading...</h3>}
-
+      </section>
+      {results?.access_token && (
         <section>
+          <h2>Test API requests: Get users</h2>
+          <p>
+            Click the button below to test using the Notion API with the token
+            you just created.
+          </p>
           {/* Once we have a token, let's see if the token actually works for API requests */}
-          {results?.access_token && <button onClick={onClick}>Test API</button>}
+          <button onClick={onClick}>Test API</button>
           {userResults && (
             <ul>
               {userResults.map((u, i) => (
@@ -79,7 +86,7 @@ export default function AuthCallback() {
             </ul>
           )}
         </section>
-      </section>
+      )}
     </main>
   );
 }
