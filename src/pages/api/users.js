@@ -16,6 +16,7 @@ export default async function handler(req, res) {
             Accept: "application/json",
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
+            "Notion-Version": "2022-06-28",
           },
         });
 
