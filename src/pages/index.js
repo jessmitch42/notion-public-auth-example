@@ -13,12 +13,8 @@ export default function Home() {
         <div className="">
           <h1>Notion API Public integration example</h1>
           <p>
-            Use this sample app as an example of how to set up public
-            authentication with the Notion API. This sample app uses the{" "}
-            <a href="https://github.com/makenotion/notion-sdk-js">
-              Notion JavaScript API
-            </a>
-            .
+            Use this demo app as an example of how to set up public
+            authentication with the Notion API.
           </p>
           <p>
             For a complete guide to authorization your Notion integration, read
@@ -30,19 +26,33 @@ export default function Home() {
           </p>
           <h2>Auth flow steps from a code perspective</h2>
           <ol>
-            <li>Navigate the user to the integration’s authorization URL</li>
             <li>
-              Notion redirects the user to the integration’s redirect_uri and
-              includes a code parameter
+              Navigate the user to the integration’s authorization URL. The auth
+              URL is available through your integration's settings at{" "}
+              <a href="https://www.notion.so/my-integrations">
+                notion.so/my-integrations
+              </a>
+              .
             </li>
             <li>
-              The integration sends the code in a POST request to the Notion API
+              Notion redirects the user to the integration’s redirect URI and
+              includes a <code>code</code> parameter.
             </li>
             <li>
-              Notion responds with an access_token and some additional
-              information
+              The integration sends the <code>code</code> in a <code>POST</code>{" "}
+              request to the Notion API.
             </li>
-            <li>The integration stores the access_token for future requests</li>
+            <li>
+              Notion responds with an <code>access_token</code> and some
+              additional information.
+            </li>
+            <li>
+              The integration code stores the <code>access_token</code> for
+              future requests. In this demo, the token is used for an API
+              request to test it works but should be stored more securely in
+              production-level apps. As a general rule, tokens should not be
+              used client-side.
+            </li>
           </ol>
           <section>
             <h2>Steps from a user's experience</h2>
@@ -52,13 +62,35 @@ export default function Home() {
             </a>
             <p>This will start the public integration auth process.</p>
             <h3>Step 2: Select pages to give access to</h3>
-            <p>Complete step 2 on the page you're redirected to. Click "Select Pages" to see the pages available to you in the workspace. Select the pages you want to give the integration access to.</p>
+            <p>
+              Complete step 2 on the page you're redirected to. Click "Select
+              Pages" to see the pages available to you in the workspace. Select
+              the pages you want to give the integration access to.
+            </p>
             <h3>Step 3: Submit page selections to be approved</h3>
-            <p>When you submit the form on the redirect page, you'll have to click "Allow access".</p>
+            <p>
+              When you submit the form on the redirect page, you'll have to
+              click "Allow access".
+            </p>
             <h3>Step 4: See if it worked</h3>
-            <p>If access is granted, you'll see the /auth-callback page and the API response will be displayed on the screen. Do not display this information in your app. It is included here to show how authentication works.</p>
-            <h3>Step 5: Decide how to store your access_token</h3>
-            <p>The access token should be kept in a safe place, like a database.</p>
+            <p>
+              If access is granted, you'll see the <code>/auth-callback</code>{" "}
+              page and the API response will be displayed on the screen. Do not
+              display this information in your app. It is included here to show
+              how authentication works.
+            </p>
+            <h3>
+              Step 5: Decide how to store your <code>access_token</code>
+            </h3>
+            <p>
+              The access token should be kept in a safe place, like a database.
+              Do not use it client-side to avoid exposing it.
+            </p>
+            <p>
+              For demo-purposes, you can test your token is valid by clicking
+              the "Test API" button after the token has been successfully
+              generated. This will my a GET /users requests to the Notion API.
+            </p>
           </section>
         </div>
       </main>

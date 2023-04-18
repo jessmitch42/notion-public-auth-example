@@ -3,6 +3,8 @@ This demo app showcases a basic example of how to set up a Notion integration wi
 
 Please refer to Next.js's [documentation](https://nextjs.org/docs/getting-started) for additional information on building with Next.js.
 
+This demo does _not_ use the <a href="https://github.com/makenotion/notion-sdk-js">Notion JavaScript API</a>, but the API requests used can be converted to use the JS SDK. 
+
 ## Running locally
 
 1. Clone this repo locally.
@@ -33,7 +35,7 @@ All of these variables are available in [notion.so/my-integrations](https://www.
 ![Secrets](https://files.readme.io/a3fff5d-authorization_url.png)
 The redirect URI is the only value not specifically listed in the **Secrets** tab, but is the value you submitted when making the integration public. It can be found under the **Distribution** tab in your integration settings.
 
-**Remember to add these environment variables to your Vercel project, as well.** Go to Settings > Environment Variables, and updated accordingly.
+**Remember to add these environment variables to your Vercel project, as well.** Go to Settings > Environment Variables, and update accordingly.
 
 5. To start your local server, run `npm run dev` in a terminal. Note: Since the redirect URI will point to the deployed version, running the project locally will also redirect users to the deployed redirect URI.
 
