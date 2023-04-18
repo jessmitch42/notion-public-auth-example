@@ -2,7 +2,7 @@
 
 export default async function handler(req, res) {
   // Add whatever request types you want to handle
-  switch (req.method) {
+  switch (req.method) {    
     case "POST":
       const { code } = JSON.parse(req.body);
 

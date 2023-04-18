@@ -1,9 +1,6 @@
-import { Client } from "@notionhq/client";
-let notion;
-
 const getOAuthAccessToken = async (code) => {
   try {
-    const response = await fetch("/api/notion", {
+    const response = await fetch("/api/auth", {
       method: "POST",
       body: JSON.stringify({ code }),
     });
@@ -12,27 +9,19 @@ const getOAuthAccessToken = async (code) => {
   } catch (err) {
     console.error(err);
   }
-}
-
-const setToken = (token) => {
-  notion = new Client({ auth: token });
-}
+};
 
 const getUsers = async (token) => {
-  // set token before making api request
-  if (!notion) {
-    setToken(token)
-  }
-
   try {
-    const response = await notion.users.list();
-    return response.results;
-  } catch (error) {
-    console.error(error);
+    const response = await fetch("/api/users", {
+      method: "POST",
+      body: JSON.stringify({ token }),
+    });
+    const res = await response.json();
+    return res;
+  } catch (err) {
+    console.error(err);
   }
 };
 
-export {
-  getOAuthAccessToken,
-  getUsers
-}
+export { getOAuthAccessToken, getUsers };
