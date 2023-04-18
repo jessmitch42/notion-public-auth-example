@@ -8,6 +8,7 @@ export default function AuthCallback() {
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [userResults, setUserResults] = useState(false);
   const { code } = router.query;
 
   useEffect(() => {
@@ -38,15 +39,18 @@ export default function AuthCallback() {
 
   const onClick = async () => {
     if (!results?.access_token) return;
+    setLoading(true);
     const users = await getUsers(results?.access_token);
     console.log(users);
+    setLoading(false);
+    setUserResults(users.results);
   };
   return (
     <main>
       <Link href="/">Go home</Link>
       <section>
+        <h2>Authorization results</h2>
         {code && <p>{code}</p>}
-        {loading && <p>Loading...</p>}
         {error && <h3>Error: {error}</h3>}
         {results && (
           <ul>
@@ -60,9 +64,20 @@ export default function AuthCallback() {
             <li>{results.workspace_name}</li>
           </ul>
         )}
+        {loading && <h3>Loading...</h3>}
+
         <section>
           {/* Once we have a token, let's see if the token actually works for API requests */}
           {results?.access_token && <button onClick={onClick}>Test API</button>}
+          {userResults && (
+            <ul>
+              {userResults.map((u, i) => (
+                <li key={i}>
+                  {u.id}: {u.name}
+                </li>
+              ))}
+            </ul>
+          )}
         </section>
       </section>
     </main>
