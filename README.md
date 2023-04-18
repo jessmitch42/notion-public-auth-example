@@ -1,59 +1,45 @@
 ## Notion public integration example
+This demo app showcases a basic example of how to set up a Notion integration with public authorization. To learn more about the types of integrations available through the Notion public REST API and how authorization works, read the Notion [Authorization guide](https://developers.notion.com/docs/authorization).
 
-1. Fork this repo.
-2. Create a Notion integration at [notion.co/my-integrations](notion.co/my-integrations).
-3. Public integrations require a redirect URI that you own. A simple way to create a redirect URI is to deploy this repo on [Vercel](https://vercel.com/), which will provide a private domain.
+Please refer to Next.js's [documentation](https://nextjs.org/docs/getting-started) for additional information on building with Next.js.
+
+## Running locally
+
+1. Clone this repo locally.
+
+```bash
+# Clone this repository locally
+git clone [repo URL]
+
+# Switch into this project
+cd notion-public-auth-example/
+
+# Install dependencies
+npm install
+```
+
+2. Create a Notion integration at [notion.co/my-integrations](notion.co/my-integrations). Integrations are internal (not public) by default. To make the integration public, follow the instructions found in the [Authorization guide](https://developers.notion.com/docs/authorization#how-to-make-an-integration-public).
+3. Public integrations require a redirect URI from a domain that you own. A simple way to create a redirect URI is to deploy this repo on [Vercel](https://vercel.com/), which will provide a private domain. If you are going to test this demo app, the easiest and faster way to do so is to deploy your copy of the repo on Vercel and use `<your-vercel-domain.com>/auth-callback` as the redirect URI. The `/auth-callback` path will map to the `AuthCallback` component found in `/pages/auth-callback.js` in this repo.
 4. Create a `.env` file with the following environment variables:
 
-// TODO: add Notion integration set-up instructions.
-
 ```
-NOTION_AUTH_URL=
-OATH_CLIENT_ID=<client-id>
-OATH_CLIENT_SECRET=<client-secret>
 NOTION_AUTH_URL=<your-auth-url>
 OAUTH_CLIENT_ID=<your-client-id>
 OAUTH_CLIENT_SECRET=<your-client-secret>
 OAUTH_REDIRECT_URI=<your-redirect-uri>
-#
 ```
 
-All of these variables are available in notion.so/my-integrations after you have created an integration and set it to be public.
+All of these variables are available in [notion.so/my-integrations](https://www.notion.so/my-integrations) under the **Secrets** tab after you have created an integration and set it to be public.
+![Secrets](https://files.readme.io/a3fff5d-authorization_url.png)
+The redirect URI is the only value not specifically listed in the **Secrets** tab, but is the value you submitted when making the integration public. It can be found under the **Distribution** tab in your integration settings.
+
+**Remember to add these environment variables to your Vercel project, as well.** Go to Settings > Environment Variables, and updated accordingly.
+
+5. To start your local server, run `npm run dev` in a terminal. Note: Since the redirect URI will point to the deployed version, running the project locally will also redirect users to the deployed redirect URI.
 
 ---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
-
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
 ## Deploy on Vercel
 
