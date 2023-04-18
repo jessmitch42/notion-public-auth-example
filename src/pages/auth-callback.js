@@ -1,4 +1,4 @@
-import { getOAuthAccessToken } from "@/lib/notion";
+import { getOAuthAccessToken, getUsers } from "@/lib/notion";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -7,11 +7,17 @@ export default function AuthCallback() {
   const router = useRouter();
   const [error, setError] = useState(null);
   const [results, setResults] = useState(null);
+  const [loading, setLoading] = useState(false);
   const { code } = router.query;
 
   useEffect(() => {
     const getToken = async (code) => {
+      // allows us to show loading state in UI
+      setLoading(true);
+
       const response = await getOAuthAccessToken(code);
+      setLoading(false);
+
       if (response.error) {
         setError(response.error);
       } else {
@@ -29,10 +35,18 @@ export default function AuthCallback() {
       getToken(code);
     }
   }, [code]);
+
+  const onClick = async () => {
+    if (!results?.access_token) return;
+    const users = await getUsers(results?.access_token);
+    console.log(users);
+  };
   return (
     <main>
       <Link href="/">Go home</Link>
       <section>
+        {code && <p>{code}</p>}
+        {loading && <p>Loading...</p>}
         {error && <h3>Error: {error}</h3>}
         {results && (
           <ul>
@@ -46,6 +60,10 @@ export default function AuthCallback() {
             <li>{results.workspace_name}</li>
           </ul>
         )}
+        <section>
+          {/* Once we have a token, let's see if the token actually works for API requests */}
+          {results?.access_token && <button onClick={onClick}>Test API</button>}
+        </section>
       </section>
     </main>
   );
